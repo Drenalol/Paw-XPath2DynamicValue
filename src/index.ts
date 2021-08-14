@@ -8,6 +8,13 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
   static title = "XPath 2.0";
   static help = "https://github.com/Drenalol/Paw-XPath2DynamicValue";
   static inputs = [
+    InputField("depthRequestPath", "Depth path of request", "Number", {
+      defaultValue: 0,
+      minValue: 0
+    }),
+    InputField("showXPathInName", "Show XPath", "Checkbox", {
+      defaultValue: true
+    }),
     InputField("request", "Source Request", "Request"),
     InputField("xpath", "XPath (Support 2.0)", "String"),
     InputField("namespaces", "Namespaces", "KeyValueList", {
@@ -16,6 +23,8 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
     })
   ];
 
+  depthRequestPath: number;
+  showXPathInName: boolean;
   request: Paw.Request;
   xpath: string;
   namespaces: any[][];
@@ -56,11 +65,33 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
   }
 
   public title(context: Paw.Context): string {
-    return this.request.name;
+    let currentDepth = 0;
+    let fullPath: string[] = this.request.name
+      ? [this.request.name]
+      : [];
+    let node = this.request.parent;
+
+    while (currentDepth < this.depthRequestPath) {
+      console.log(currentDepth);
+      if (node) {
+        if (node.name)
+          fullPath.push(node.name);
+
+        node = node.parent;
+      } else {
+        break;
+      }
+      currentDepth++;
+    }
+
+    return fullPath.reverse().join("-");
   }
 
   public text(context: Paw.Context): string {
-    return this.xpath;
+    if (this.showXPathInName)
+      return this.xpath;
+
+    return "";
   }
 }
 
