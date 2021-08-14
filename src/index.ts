@@ -1,7 +1,7 @@
 import Paw from "./types-paw-api/paw";
 import xmldom from "xmldom";
 
-const xpath = require("../../xpath2/xpath2");
+const xpath = require("./lib/xpath2");
 
 class XPath2Evaluator implements Paw.DynamicValuePlugin {
   static identifier = "com.yanysh.Paw.XPath2Evaluator";
@@ -65,6 +65,9 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
   }
 
   public title(context: Paw.Context): string {
+    if (!this.request)
+      return "";
+
     let currentDepth = 0;
     let fullPath: string[] = this.request.name
       ? [this.request.name]
