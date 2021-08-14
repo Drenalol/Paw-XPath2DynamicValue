@@ -6,7 +6,7 @@ const xpath = require("../../xpath2/xpath2");
 class XPath2Evaluator implements Paw.DynamicValuePlugin {
   static identifier = "com.yanysh.Paw.XPath2Evaluator";
   static title = "XPath 2.0";
-  static help = "https://github.com/drenalol/XPath2DynamicValue";
+  static help = "https://github.com/Drenalol/Paw-XPath2DynamicValue";
   static inputs = [
     InputField("request", "Source Request", "Request"),
     InputField("xpath", "XPath (Support 2.0)", "String"),
