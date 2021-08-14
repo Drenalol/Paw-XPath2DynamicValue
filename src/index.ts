@@ -72,7 +72,6 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
     let node = this.request.parent;
 
     while (currentDepth < this.depthRequestPath) {
-      console.log(currentDepth);
       if (node) {
         if (node.name)
           fullPath.push(node.name);
