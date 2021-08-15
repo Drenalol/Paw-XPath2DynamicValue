@@ -1,7 +1,7 @@
 ## Installation
 
 # Extension Store
-- Find XPath2Evaluator in the store of Paw Extensions
+- Find XPath2Evaluator in the store of [Paw Extensions](https://paw.cloud/extensions/)
 - Install
 
 # Manual
