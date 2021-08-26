@@ -35,7 +35,7 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
     if (!xmlBody || !this.xpath)
       return "";
 
-    const document = new xmldom.DOMParser().parseFromString(xmlBody, "application/xml");
+    const document = new xmldom.DOMParser().parseFromString(xmlBody);
 
     let namespaceResolver: XPathNSResolver | undefined = undefined;
 
@@ -60,6 +60,9 @@ class XPath2Evaluator implements Paw.DynamicValuePlugin {
 
       evaluateInnerXml = evaluateInnerXml.concat(node.toString());
     }
+
+    if (!evaluateInnerXml)
+      throw "XPath evaluate: nothing found";
 
     return evaluateInnerXml;
   }
